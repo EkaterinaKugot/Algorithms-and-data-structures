@@ -25,9 +25,6 @@ for i in range(6):
     py_memory_size.append(sys.getsizeof(counter))
     py_filling_time.append((end-start) * 10**6)
 
-print(с_arr_n, с_memory_size)
-print(py_arr_n, py_memory_size)
-
 plt.figure()
 a1 = plt.subplot(221)
 a1.set_title('C++ memory')
