@@ -18,7 +18,7 @@ public:
             for (int i = 0; i < size; i++) vec.push_back(val);
     };
 
-    NDArray(vector<int>* sh, T val = INT_MAX) { //создание много-мерного массива заполненого каким-либо значением
+    NDArray(vector<int>* sh, T val = INT_MAX) { //создание многомерного массива заполненого каким-либо значением
         int prod = 1;
         for (auto value : *sh) {
             prod *= value;
