@@ -47,26 +47,9 @@ def make_graph(sites, max_distance=50): #строим граф
     return edges, nodes
 
 def get_spanning_trees(graph): 
-    graph2 = graph
-    edges, nodes = [], []
-    for node in graph2.nodes:
-        nodes.append(node)
-        connected_edges = list(filter(lambda edge: edge[1] not in nodes,
-                                 graph2.edges(node)))
-        min_edge = sorted(connected_edges, key=lambda e: graph2.get_edge_data(*e)["weight"])
-        if (len(min_edge) != 0):
-            min_edge = min_edge[0]
-        else:
-            continue
-        edges.append(min_edge + (graph2.get_edge_data(*min_edge)["weight"], ))
-        graph2.remove_edges
-    result = nx.Graph()
-    result.add_weighted_edges_from(edges)
-    result.add_nodes_from(nodes) 
-    return result
+    return minimum_spanning_tree(graph)
 
-def get_clusters(graph: nx.Graph, n_clusters: int): 
-    spanning_tree = minimum_spanning_tree(graph)
+def get_clusters(spanning_tree: nx.Graph, n_clusters: int): 
     sorted_edges = sorted(spanning_tree.edges(data=True),
                            key=lambda x: x[2]['weight'], reverse=True)
     copy_tree = spanning_tree.copy()
@@ -122,6 +105,7 @@ graph = nx.Graph()
 graph.add_weighted_edges_from(edges)
 graph.add_nodes_from(nodes)
 
-result = get_clusters(graph, 40)
+r = get_spanning_trees(graph)
+result = get_clusters(r, 40)
 print(result)
 print("Number of clusters: ", len(result))
