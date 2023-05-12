@@ -24,12 +24,12 @@ def pjw(data):
 def buz(data):
     h = 0
     R = dict()
+    for r, i in enumerate(data):
+        R[i] = r
     for ki in data:
         highorder = h & 0x80000000
         h = h << 1
         h = h ^ (highorder >> 31)
-        if not(ki in R):
-            R[ki] = random.randint(0, 0xFFFFFFFF)
         h = h ^ R[ki]
     return h
 
